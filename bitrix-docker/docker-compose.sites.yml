@@ -1,0 +1,154 @@
+services:
+  nginx:
+    networks:
+      default:
+        aliases:
+        - nek.local
+        - nzpi.local
+        - nartis.local
+        - rtk.local
+
+  phpmyadmin:
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOSTS: mysql-site1,mysql-nek,mysql-nzpi,mysql-nartis,mysql-rtk
+      PMA_VERBOSE: site1,nek,nzpi,nartis,rtk
+      UPLOAD_LIMIT: 1024M
+
+  php-nek:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/nek/www:/var/www/nek/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+
+  mysql-nek:
+    image: mysql:8.0
+    platform: linux/arm64
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bitrix
+      MYSQL_USER: bitrix
+      MYSQL_PASSWORD: bitrix
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time-zone=+03:00 --innodb-strict-mode=0 --sql-mode=""
+    volumes:
+      - mysql_nek_data:/var/lib/mysql
+
+  cron-nek:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/nek/www:/var/www/nek/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+    command: ["sh", "-lc", "while true; do php -f /var/www/nek/www/bitrix/modules/main/tools/cron_events.php; sleep 60; done"]
+    depends_on:
+      - mysql-nek
+      - php-nek
+
+  php-nzpi:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/nzpi/www:/var/www/nzpi/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+
+  mysql-nzpi:
+    image: mysql:8.0
+    platform: linux/arm64
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bitrix
+      MYSQL_USER: bitrix
+      MYSQL_PASSWORD: bitrix
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time-zone=+03:00 --innodb-strict-mode=0 --sql-mode=""
+    volumes:
+      - mysql_nzpi_data:/var/lib/mysql
+
+  cron-nzpi:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/nzpi/www:/var/www/nzpi/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+    command: ["sh", "-lc", "while true; do php -f /var/www/nzpi/www/bitrix/modules/main/tools/cron_events.php; sleep 60; done"]
+    depends_on:
+      - mysql-nzpi
+      - php-nzpi
+
+  php-nartis:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/nartis/www:/var/www/nartis/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+
+  mysql-nartis:
+    image: mysql:8.0
+    platform: linux/arm64
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bitrix
+      MYSQL_USER: bitrix
+      MYSQL_PASSWORD: bitrix
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time-zone=+03:00 --innodb-strict-mode=0 --sql-mode=""
+    volumes:
+      - mysql_nartis_data:/var/lib/mysql
+
+  cron-nartis:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/nartis/www:/var/www/nartis/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+    command: ["sh", "-lc", "while true; do php -f /var/www/nartis/www/bitrix/modules/main/tools/cron_events.php; sleep 60; done"]
+    depends_on:
+      - mysql-nartis
+      - php-nartis
+
+  php-rtk:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/rtk/www:/var/www/rtk/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+
+  mysql-rtk:
+    image: mysql:8.0
+    platform: linux/arm64
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bitrix
+      MYSQL_USER: bitrix
+      MYSQL_PASSWORD: bitrix
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time-zone=+03:00 --innodb-strict-mode=0 --sql-mode=""
+    volumes:
+      - mysql_rtk_data:/var/lib/mysql
+
+  cron-rtk:
+    image: bitrix-php:8.4-v1
+    platform: linux/arm64
+    volumes:
+      - ../bitrix-projects/rtk/www:/var/www/rtk/www
+      - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./php/msmtprc:/etc/msmtprc
+    command: ["sh", "-lc", "while true; do php -f /var/www/rtk/www/bitrix/modules/main/tools/cron_events.php; sleep 60; done"]
+    depends_on:
+      - mysql-rtk
+      - php-rtk
+
+volumes:
+  mysql_nek_data:
+  mysql_nzpi_data:
+  mysql_nartis_data:
+  mysql_rtk_data:
