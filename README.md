@@ -31,7 +31,20 @@
 - macOS 13+
 - Ubuntu 22+
 
+Рекомендуемые ресурсы:
+
+Для 3–10 сайтов:
+CPU:
+8+ ядер
+RAM:
+16–32 GB
+Свободное место:
+100–200 GB SSD
+Docker Memory:
+16–24 GB
+
 ---
+
 
 ### Обязательно установить
 
@@ -82,7 +95,9 @@ make new
 - кодировка БД
 - restore.php / bitrixsetup.php / ничего
 
-В /bitrix-projects/ пояаится папка сайта www и README.md с нужными ссылками и реквизитами
+В /bitrix-projects/ пояаится папка сайта www и README.md с нужными ссылками и реквизитами.
+
+Пример
 ----------------------------------
 # site.local
 
@@ -132,18 +147,14 @@ make remove
 ## Сервисы
 
 Сайт:
-
 http://site.local
 
 phpMyAdmin:
-
 http://localhost:8080
-
 Логин: bitrix  
 Пароль: bitrix
 
 Почта:
-
 http://localhost:8025
 
 ## Команды Make
