@@ -17,6 +17,33 @@
 - Cron для Bitrix
 - Проверка Bitrix проходит sockets/mail/mysql
 
+## Требования
+
+### ОС
+
+Поддерживается без доработок:
+
+- macOS (Intel / Apple Silicon M1 M2 M3 M4 M5)
+- Linux (Ubuntu, Debian и др.)
+
+Рекомендуется:
+
+- macOS 13+
+- Ubuntu 22+
+
+---
+
+### Обязательно установить
+
+- Docker Desktop
+- Docker Compose (обычно входит в Docker Desktop)
+
+Проверка:
+
+```bash
+docker -v
+docker compose version
+
 ## Установка
 
 1. Установить Docker Desktop
