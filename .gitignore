@@ -1,3 +1,5 @@
 bitrix-projects/*
 !bitrix-projects/.gitkeep
-.continue
+.idea/
+.DS_Store
+.continue/
