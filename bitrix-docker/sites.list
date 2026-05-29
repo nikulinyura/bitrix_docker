@@ -1,0 +1,9 @@
+# format: name php charset installer
+nek 8.4 utf8mb4 bitrixsetup
+nzpi 8.4 utf8mb4 bitrixsetup
+nartis 8.4 utf8mb4 bitrixsetup
+rtk 8.4 utf8mb4 bitrixsetup
+optovka1 8.4 utf8mb3 restore
+stroiopt31 8.1 utf8mb3 restore
+avspec 8.4 utf8mb4 restore
+oe 8.4 utf8mb4 restore
