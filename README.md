@@ -50,7 +50,9 @@
 
 Проверка:
 
-bash docker -v docker compose version
+```bash 
+docker -v docker compose version
+````
 
 ---
 
@@ -58,22 +60,28 @@ bash docker -v docker compose version
 
 Перейти в папку проекта:
 
-bash cd bitrix-docker
-
+``` bash 
+cd bitrix-docker
+```
 Собрать PHP-образы (один раз):
 
-bash docker build -t bitrix-php:7.4-v1 php/7.4 docker build -t bitrix-php:8.1-v1 php/8.1 docker build -t bitrix-php:8.2-v1 php/8.2 docker build -t bitrix-php:8.3-v1 php/8.3 docker build -t bitrix-php:8.4-v1 php/8.4
-
+``` bash 
+docker build -t bitrix-php:7.4-v1 php/7.4 
+docker build -t bitrix-php:8.1-v1 php/8.1 
+docker build -t bitrix-php:8.2-v1 php/8.2 
+docker build -t bitrix-php:8.3-v1 php/8.3 
+docker build -t bitrix-php:8.4-v1 php/8.4
+```
 Запустить окружение:
-
-bash make up
-
+``` bash 
+make up
+```
 ---
 
 # Создание сайта
-
-bash make new
-
+``` bash 
+make new
+```
 Скрипт предложит выбрать:
 
 - название сайта
@@ -87,7 +95,9 @@ bash make new
 
 Структура:
 
-text bitrix-projects/ └── site/     ├── www/     └── README.md
+```text 
+bitrix-projects/ └── site/     ├── www/     └── README.md
+```
 
 Пример README сайта:
 
@@ -106,8 +116,9 @@ text # site.local  URL: http://site.local  Web root: www/  PHP: 8.4  Database: -
 
 # Удаление сайта
 
-bash make remove
-
+```bash 
+make remove
+```
 Показывается список сайтов для выбора.
 
 Удаляются:
@@ -127,20 +138,23 @@ bash make remove
 
 Создать дамп:
 
-bash make backup
-
+```bash 
+make backup
+```
 Выбрать сайт из списка.
 
 Дампы сохраняются в:
 
-text backups/
-
+```text 
+backups/
+```
 ---
 
 # Восстановление БД
 
-bash make restore-db
-
+```bash 
+make restore-db
+```
 Выбрать:
 
 1. Сайт
@@ -158,22 +172,38 @@ text http://site.local
 
 phpMyAdmin:
 
-text http://localhost:8080
-
+```text 
+http://localhost:8080
+```
 Логин:
 
-text bitrix
+```text 
+bitrix
+```
 
 Пароль:
 
-text bitrix
-
+```text 
+bitrix
+```
 Почта:
 
-text http://localhost:8025
-
+```text 
+http://localhost:8025
+```
 ---
 
 # Команды Make
 
-bash make up make down make restart make ps make logs  make new make remove  make backup make restore-db  make new-site make remove-site 
+```bash 
+make up 
+make down 
+make restart 
+make ps 
+make logs  
+make new 
+make remove  
+make backup 
+make restore-db  
+
+```
